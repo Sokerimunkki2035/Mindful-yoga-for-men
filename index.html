@@ -2,7 +2,7 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8" />
-  <title>Mindful Jooga – Isokokoisen Miehen Videot</title>
+  <title>Mindful Jooga – Animoitu isokokoinen mies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -71,30 +71,40 @@
       justify-content: center;
       align-items: center;
     }
-    /* yksinkertainen piirretty hahmo */
-    .yoga-guy { position: relative; width: 160px; height: 180px; }
-    .yg-body {
-      position: absolute; bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 110px; height: 110px;
-      background: #5cc2a5;
-      border-radius: 55% 55% 45% 45%;
+
+    main { margin-top: 10px; }
+
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
     }
-    .yg-belly {
-      position: absolute; bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 120px; height: 90px;
-      background: #4b9e87;
-      border-radius: 60% 60% 40% 40%;
+
+    .breath-box {
+      background: #f6fbff;
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      border: 1px solid #dde8ff;
+      font-size: 0.95rem;
     }
-    .yg-head {
-      position: absolute; top: 12px; left: 50%;
-      transform: translateX(-50%);
-      width: 60px; height: 60px;
-      background: #f7c59f;
-      border-radius: 50%;
-      box-shadow: 0 2px 0 rgba(0,0,0,0.15) inset;
+    .breath-box strong {
+      display: block;
+      margin-bottom: 4px;
     }
-    .yg-face { position: absolute; inset: 0; }
-    .yg-eye {
-      position: absolute;
+
+    /* Perus-asetelma animaatioille */
+    .anim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .anim-card {
+      background: #fafafa;
+      border-radius: 16px;
+      border: 1px solid #e3e3e3;
+      padding: 12px 12px 16px;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+       gap: 6px;
