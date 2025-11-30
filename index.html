@@ -2,19 +2,14 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8" />
-  <title>Mindful Jooga – Isokokoisen Miehen Joogatuokiot</title>
+  <title>Mindful Jooga – Isokokoisen Miehen Videot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: #f4f5fb;
@@ -37,17 +32,14 @@
       text-align: center;
       margin-bottom: 24px;
     }
-
     header h1 {
       font-size: 1.9rem;
       margin-bottom: 8px;
     }
-
     header p {
       font-size: 0.98rem;
       color: #555;
     }
-
     .tagline {
       font-size: 0.9rem;
       color: #777;
@@ -65,17 +57,8 @@
       border-radius: 18px;
       background: linear-gradient(135deg, #e4f4ff, #f9ecff);
     }
-
-    .hero-text {
-      flex: 1 1 260px;
-      min-width: 240px;
-    }
-
-    .hero-text h2 {
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-    }
-
+    .hero-text { flex: 1 1 260px; min-width: 240px; }
+    .hero-text h2 { font-size: 1.3rem; margin-bottom: 8px; }
     .hero-text ul {
       margin-left: 1.2rem;
       font-size: 0.95rem;
@@ -88,332 +71,30 @@
       justify-content: center;
       align-items: center;
     }
-
-    /* Yksinkertainen, ystävällinen “lihava” mies -hahmo */
-    .yoga-guy {
-      position: relative;
-      width: 160px;
-      height: 180px;
-    }
-
+    /* yksinkertainen piirretty hahmo */
+    .yoga-guy { position: relative; width: 160px; height: 180px; }
     .yg-body {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
+      position: absolute; bottom: 0; left: 50%;
       transform: translateX(-50%);
-      width: 110px;
-      height: 110px;
+      width: 110px; height: 110px;
       background: #5cc2a5;
       border-radius: 55% 55% 45% 45%;
     }
-
     .yg-belly {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
+      position: absolute; bottom: 0; left: 50%;
       transform: translateX(-50%);
-      width: 120px;
-      height: 90px;
+      width: 120px; height: 90px;
       background: #4b9e87;
       border-radius: 60% 60% 40% 40%;
     }
-
     .yg-head {
-      position: absolute;
-      top: 12px;
-      left: 50%;
+      position: absolute; top: 12px; left: 50%;
       transform: translateX(-50%);
-      width: 60px;
-      height: 60px;
+      width: 60px; height: 60px;
       background: #f7c59f;
       border-radius: 50%;
       box-shadow: 0 2px 0 rgba(0,0,0,0.15) inset;
     }
-
-    .yg-face {
-      position: absolute;
-      inset: 0;
-    }
-
+    .yg-face { position: absolute; inset: 0; }
     .yg-eye {
       position: absolute;
-      top: 26px;
-      width: 6px;
-      height: 6px;
-      background: #333;
-      border-radius: 50%;
-    }
-
-    .yg-eye.left {
-      left: 20px;
-    }
-
-    .yg-eye.right {
-      right: 20px;
-    }
-
-    .yg-smile {
-      position: absolute;
-      bottom: 18px;
-      left: 50%;
-      width: 30px;
-      height: 16px;
-      border-radius: 0 0 30px 30px;
-      border-bottom: 3px solid #333;
-      transform: translateX(-50%);
-    }
-
-    .yg-leg {
-      position: absolute;
-      bottom: 0;
-      width: 26px;
-      height: 40px;
-      background: #30485c;
-      border-radius: 16px;
-    }
-
-    .yg-leg.left {
-      left: 36px;
-    }
-
-    .yg-leg.right {
-      right: 36px;
-    }
-
-    .yg-mat {
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 160px;
-      height: 14px;
-      background: #c2d4ff;
-      border-radius: 999px;
-    }
-
-    main {
-      margin-top: 10px;
-    }
-
-    .section-title {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    .breath-box {
-      background: #f6fbff;
-      border-radius: 16px;
-      padding: 12px 14px;
-      margin-bottom: 16px;
-      border: 1px solid #dde8ff;
-      font-size: 0.95rem;
-    }
-
-    .breath-box strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .poses-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 16px;
-      margin-top: 10px;
-    }
-
-    .pose-card {
-      background: #fafafa;
-      border-radius: 16px;
-      padding: 14px 14px 16px;
-      border: 1px solid #e3e3e3;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .pose-name {
-      font-weight: 600;
-      font-size: 1.02rem;
-    }
-
-    .pose-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #eef8f1;
-      color: #33825d;
-      margin-bottom: 2px;
-    }
-
-    .pose-level {
-      font-size: 0.78rem;
-      color: #777;
-    }
-
-    .pose-steps {
-      font-size: 0.9rem;
-    }
-
-    .pose-steps li {
-      margin-left: 1.1rem;
-      margin-bottom: 2px;
-    }
-
-    .pose-note {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 4px;
-    }
-
-    .pose-placeholder {
-      margin-top: 6px;
-      font-size: 0.8rem;
-      padding: 6px 8px;
-      border-radius: 10px;
-      background: #f0f2ff;
-      color: #4a4f7a;
-    }
-
-    .footer-note {
-      margin-top: 24px;
-      font-size: 0.78rem;
-      color: #777;
-      text-align: center;
-    }
-
-    .inline-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      border: 1px solid #ddd;
-      margin-left: 4px;
-    }
-
-    @media (max-width: 600px) {
-      .page {
-        padding: 16px 14px 28px;
-        border-radius: 14px;
-      }
-      header h1 {
-        font-size: 1.5rem;
-      }
-      .hero {
-        padding: 12px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <header>
-      <h1>Mindful Jooga – Isokokoisen Miehen Aloituspaketti</h1>
-      <p>Rauhallisia asentoja aloittelijoille. Ei akrobatiaa, ei suorituspainetta.</p>
-      <div class="tagline">Hengitä, liiku hitaasti ja kunnioita kehoasi juuri sellaisena kuin se on.</div>
-    </header>
-
-    <section class="hero">
-      <div class="hero-text">
-        <h2>Mikä tämä sivu on?</h2>
-        <p>
-          Tällä sivulla isokokoinen mies näyttää mielikuvan siitä, että <strong>jooga on kaikille</strong>.
-          Asennot on valittu erityisesti aloittelijoille ja kehoystävällisiksi.
-        </p>
-        <ul>
-          <li>Hitaat liikkeet ja selkeät ohjeet</li>
-          <li>Huomio polviin, selkään ja vatsaan</li>
-          <li>Voit tehdä vaikka pyjamassa olohuoneessa</li>
-        </ul>
-      </div>
-
-      <div class="hero-figure" aria-hidden="true">
-        <div class="yoga-guy">
-          <div class="yg-mat"></div>
-          <div class="yg-leg left"></div>
-          <div class="yg-leg right"></div>
-          <div class="yg-belly"></div>
-          <div class="yg-body"></div>
-          <div class="yg-head">
-            <div class="yg-face">
-              <div class="yg-eye left"></div>
-              <div class="yg-eye right"></div>
-              <div class="yg-smile"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <main>
-      <section>
-        <h2 class="section-title">Ennen kuin aloitat</h2>
-        <div class="breath-box">
-          <strong>Hengitys &amp; turvallisuus</strong>
-          <ul>
-            <li>Jos sinulla on terveysongelmia, kysy lääkäriltä ennen aloittamista.</li>
-            <li>Jos jokin sattuu tai tuntuu väärältä – <strong>lopeta heti</strong>.</li>
-            <li>Liiku vain siihen asti, missä tuntuu miellyttävältä venytykseltä, ei kipua.</li>
-            <li>Hengitä nenän kautta sisään 4 sekuntia ja suun kautta ulos 6 sekuntia.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="section-title">Mindful jooga-asennot aloittelijalle</h2>
-
-        <div class="poses-grid">
-          <!-- Pose 1 -->
-          <article class="pose-card">
-            <div class="pose-name">1. Vuoriasento tuolilla</div>
-            <div class="pose-level">Seisten tai tuolilla, helppo aloitusasento</div>
-            <span class="pose-tag">Mindful hengitys</span>
-
-            <ul class="pose-steps">
-              <li>Istu tukevasti tuolilla tai seiso jalat lantion leveydellä.</li>
-              <li>Anna vatsan olla pehmeä, ei tarvitse vetää sisään.</li>
-              <li>Rullaa hartiat kevyesti taakse ja alas.</li>
-              <li>Hengitä sisään: tunne rinnan ja vatsan kohoavan.</li>
-              <li>Hengitä ulos: anna hartioiden hieman rentoutua ja katseen pehmetä.</li>
-            </ul>
-
-            <p class="pose-note">
-              Voit pitää kädet reisillä, sivuilla tai yhdistää kämmenet kevyesti rinnan eteen.
-            </p>
-            <div class="pose-placeholder">
-              Kuvamielikuva: isokokoinen mies seisoo tai istuu ryhdikkäästi, jalat tukevasti maassa, kädet rentona.
-            </div>
-          </article>
-
-          <!-- Pose 2 -->
-          <article class="pose-card">
-            <div class="pose-name">2. Tuoliasento seinää vasten</div>
-            <div class="pose-level">Reidet töissä, selälle tukea</div>
-            <span class="pose-tag">Jalat &amp; keskivartalo</span>
-
-            <ul class="pose-steps">
-              <li>Nojaa selällä seinää vasten, jalat hieman edessä.</li>
-              <li>Laskeudu kevyesti “näkyvään tuoliin” – polvet noin 90 asteen kulmaan tai korkeammalle, jos polvet kipeät.</li>
-              <li>Pidä vatsaa hieman aktiivisena, mutta anna vatsan silti olla pehmeän pyöreä.</li>
-              <li>Hengitä rauhallisesti sisään ja ulos 5–8 hengityksen ajan.</li>
-            </ul>
-
-            <p class="pose-note">
-              Jos reidet väsyvät, tule heti ylös. Voit tehdä asennon 2–3 kierrosta.
-            </p>
-            <div class="pose-placeholder">
-              Kuvamielikuva: isokokoinen mies “istuu” näkymättömällä tuolilla seinää vasten, kädet rennosti reisillä.
-            </div>
-          </article>
-
-          <!-- Pose 3 -->
-          <article class="pose-card">
-            <div class="pose-name">3. Kissa–lehmä pöydän ääressä</div>
-            <div class="pose-level">Selälle liikettä, ilman lattialle menoa</div>
-            <span class="pose-tag">Selän mobilisointi</span>
-
-            <ul class="pose-steps">
-              <li>Istu tuolilla pöydän ääressä, kädet pöydällä.</li>
-              <li>Hengitä sisään ja kaarra selkää hieman notkolle, katse ylös – “lehmä”.</li>
-              <li>Hengitä ulos ja pyöristä selkää, vedä napaa kevyesti sisään – “kissa”.</li>
-              <li>Toista 8–10 kertaa rauhalliseen heng
