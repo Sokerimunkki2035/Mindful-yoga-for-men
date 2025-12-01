@@ -2,14 +2,19 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
-  <title>Mindful Jooga – Ohjelmavalikko & Ääniopastus</title>
+  <title>Mindful Jooga – Bussille ja kotiin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     body {
       background: #f4f5fb;
       color: #222;
@@ -25,24 +30,39 @@
       padding: 22px 16px 30px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     }
-    header { text-align: center; margin-bottom: 18px; }
-    header h1 { font-size: 1.7rem; margin-bottom: 6px; }
-    .tagline { font-size: 0.85rem; color: #777; margin-top: 4px; }
-
-    .menu-title {
+    header {
       text-align: center;
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    header h1 {
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+    }
+    header p {
+      font-size: 0.96rem;
+      color: #555;
+    }
+    .tagline {
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 4px;
     }
 
+    /* ohjelmavalikko */
+    #menu {
+      margin-top: 12px;
+    }
+    .menu-title {
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
     .menu-buttons {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 14px;
     }
-
     .menu-buttons button {
       border: none;
       padding: 12px 16px;
@@ -52,57 +72,103 @@
       color: #fff;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       cursor: pointer;
+      text-align: left;
+    }
+    .menu-buttons button span {
+      display: block;
+      font-size: 0.8rem;
+      opacity: 0.9;
     }
     .menu-buttons button:active {
       transform: translateY(1px);
+    }
+
+    /* ohjelmanäkymä */
+    #pose-area.hidden {
+      display: none;
+    }
+    #pose-area {
+      margin-top: 8px;
+    }
+    .top-back {
+      margin-bottom: 10px;
+    }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #4c7dff;
+      color: #fff;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    }
+    .btn-secondary {
+      background: #e3e6ff;
+      color: #2c3f7a;
     }
 
     .pose-card {
       padding: 16px;
       border-radius: 16px;
       background: #f7f7ff;
-      margin-top: 10px;
       border: 1px solid #ddd;
     }
-
+    .pose-program-title {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 4px;
+    }
     .pose-title {
       font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
-    .pose-sub { font-size: 0.9rem; color: #666; margin-bottom: 8px; }
-
-    ul { margin-left: 1.1rem; font-size: 0.9rem; }
-    .pose-note { font-size: 0.82rem; color: #666; margin-top: 8px; }
-
+    .pose-sub {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    #pose-steps {
+      margin-left: 1.1rem;
+      font-size: 0.9rem;
+    }
+    #pose-steps li {
+      margin-bottom: 2px;
+    }
+    #pose-note {
+      font-size: 0.82rem;
+      color: #666;
+      margin-top: 8px;
+    }
     .controls {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 14px;
     }
-
-    button.action {
-      border: none;
-      border-radius: 999px;
-      padding: 9px 16px;
-      font-size: 0.92rem;
-      cursor: pointer;
-      background: #4c7dff;
-      color: white;
+    .hint {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 8px;
     }
-    button.alt {
-      background: #e3e6ff;
-      color: #2c3f7a;
-    }
-
-    .hidden { display: none; }
-
     .footer-note {
-      margin-top: 20px;
+      margin-top: 22px;
       font-size: 0.75rem;
       color: #777;
       text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 18px 12px 24px;
+        border-radius: 14px;
+      }
+      header h1 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
@@ -110,235 +176,295 @@
   <div class="page">
     <header>
       <h1>Mindful Jooga – Ääniopastus</h1>
-      <div class="tagline">Lyhyitä harjoituksia bussille, töihin ja kotiin.</div>
+      <p>Lyhyitä harjoituksia bussille ja kotiin. Yksi lause kerrallaan, omaan tahtiin.</p>
+      <div class="tagline">Jooga on sinua varten juuri sellaisena kuin olet.</div>
     </header>
 
     <!-- OHJELMAVALIKKO -->
-    <div id="menu">
+    <section id="menu">
       <div class="menu-title">Valitse ohjelma</div>
       <div class="menu-buttons">
-        <button onclick="startProgram('startWaiting')">🚌 Bussin lähtöä odottaessa</button>
-        <button onclick="startProgram('driverSeat')">🪑 Kuljettajan penkissä</button>
-        <button onclick="startProgram('insideBus')">🚏 Matkustajien alueella</button>
-        <button onclick="startProgram('homeRelax')">🏠 Kotona tehtävä ohjelma</button>
+        <button onclick="startProgram('startWaiting')">
+          🚌 Bussin lähtöä odottaessa
+          <span>Seisten tai tuolilla, nopea rauhoitus ennen ajoa</span>
+        </button>
+        <button onclick="startProgram('driverSeat')">
+          🪑 Kuljettajan penkissä
+          <span>Turvallisia mikroliikkeitä istuen</span>
+        </button>
+        <button onclick="startProgram('insideBus')">
+          🚏 Matkustajien alueella
+          <span>Huomaamaton hengitys ja pienet liikkeet</span>
+        </button>
+        <button onclick="startProgram('homeRelax')">
+          🏠 Kotona tehtävä ohjelma
+          <span>Rauhoittuminen työpäivän jälkeen</span>
+        </button>
       </div>
-    </div>
+    </section>
 
-    <!-- SISÄLTÖALUE – TÄYTETÄÄN JAVASCRIPTILLÄ -->
-    <div id="pose-area" class="hidden">
-      <button onclick="backToMenu()" class="action alt">⬅️ Takaisin ohjelmavalikkoon</button>
+    <!-- OHJELMA-ALUE -->
+    <section id="pose-area" class="hidden">
+      <div class="top-back">
+        <button class="btn btn-secondary" onclick="backToMenu()">⬅️ Takaisin ohjelmavalikkoon</button>
+      </div>
 
       <div class="pose-card">
+        <div id="program-label" class="pose-program-title"></div>
         <div id="pose-title" class="pose-title"></div>
         <div id="pose-sub" class="pose-sub"></div>
         <ul id="pose-steps"></ul>
-        <p id="pose-note" class="pose-note"></p>
+        <p id="pose-note"></p>
 
         <div class="controls">
-          <button id="btn-next-line" class="action">🔊 Lue seuraava lause</button>
-          <button id="btn-next" class="action alt">➡️ Seuraava asento</button>
+          <button id="btn-next-line" class="btn btn-primary">🔊 Lue seuraava lause</button>
+          <button id="btn-next-pose" class="btn btn-secondary">➡️ Seuraava asento</button>
         </div>
-      </div>
 
-      <p style="font-size:0.75rem; color:#777; margin-top:8px;">
-        Vinkki: jos puhe ei kuulu, tarkista median äänenvoimakkuus.
-      </p>
-    </div>
+        <p class="hint">
+          Jos puhe ei kuulu, tarkista median äänenvoimakkuus tai kokeile Chrome-selainta.
+        </p>
+      </div>
+    </section>
 
     <p class="footer-note">
-      Tämä sivu ei korvaa ammattilaisen ohjausta.
+      Tämä sivu ei korvaa ammattilaisen ohjausta. Kuuntele aina omaa kehoasi.
     </p>
   </div>
 
-<script>
-// ------------- OHJELMAT -------------
-const programs = {
-  startWaiting: [
-    {
-      title: "Rauhoittava hengitys",
-      sub: "6 hengityskierrosta seisten tai tuolissa",
-      steps: [
-        "Asetu tukevasti seisomaan tai istu penkille",
-        "Hengitä nenän kautta sisään neljä sekuntia",
-        "Pidä hetki paussia",
-        "Hengitä suun kautta ulos kuusi sekuntia",
-        "Toista kuusi kertaa rauhallisesti"
-      ],
-      note: "Katse voi olla alaviistoon. Tämä rauhoittaa hermostoa nopeasti."
-    },
-    {
-      title: "Hartioiden avaus",
-      sub: "Valmistaa kuljettajan päivään",
-      steps: [
-        "Rullaa hartiat hitaasti taakse",
-        "Hengitä sisään ja nosta rintaa hieman",
-        "Hengitä ulos ja anna hartioiden pudota",
-        "Toista viisi kertaa",
-        "Pidä hengitys pehmeänä koko ajan"
-      ],
-      note: "Liike on hyvin pieni ja huomaamaton."
+  <script>
+    // ------------------ OHJELMAT ------------------
+    const programs = {
+      startWaiting: {
+        label: "Ohjelma: bussin lähtöä odottaessa",
+        poses: [
+          {
+            title: "Rauhoittava hengitys",
+            sub: "6 hengityskierrosta seisten tai tuolilla",
+            steps: [
+              "Asetu tukevasti seisomaan tai istu penkille",
+              "Hengitä nenän kautta sisään neljä laskua",
+              "Pidä lyhyt tauko, yksi lasku",
+              "Hengitä suun kautta ulos kuusi laskua",
+              "Toista tämä rauhallinen hengitys kuusi kierrosta"
+            ],
+            note: "Katse voi olla alaviistoon. Hengitys on pehmeä, ei pakotettu."
+          },
+          {
+            title: "Hartioiden avaus",
+            sub: "Valmistaa yläkroppaa ajoon",
+            steps: [
+              "Anna käsien roikkua rennosti sivuilla",
+              "Hengitä sisään ja rullaa hartiat hitaasti korvia kohti",
+              "Hengitä ulos ja rullaa hartiat taakse ja alas",
+              "Toista liike viisi kertaa hengityksen tahdissa",
+              "Lopuksi hengitä syvään sisään ja pitkään ulos"
+            ],
+            note: "Liike voi olla hyvin pieni, tärkeintä on tuntea rentoutuminen."
+          }
+        ]
+      },
+
+      driverSeat: {
+        label: "Ohjelma: kuljettajan penkissä",
+        poses: [
+          {
+            title: "Alaselän hellä keinutus",
+            sub: "Istuen kuljettajan penkissä, paikallaan ollessa",
+            steps: [
+              "Istu selkä suorana penkissä, jalat tukevasti lattiassa",
+              "Hengitä sisään ja kallista lantiota hyvin vähän eteenpäin",
+              "Hengitä ulos ja kallista lantiota hyvin vähän taaksepäin",
+              "Jatka pientä keinutusta kahdeksan hengityskierroksen ajan",
+              "Pidä liike kivuttomana ja hengitys tasaisena"
+            ],
+            note: "Tämä on huomaamaton liike joka vapauttaa alaselkää."
+          },
+          {
+            title: "Niskan pidentäminen",
+            sub: "Voidaan tehdä punaisissa valoissa",
+            steps: [
+              "Hengitä sisään ja kuvittele että pää kasvaa kevyesti ylöspäin",
+              "Hengitä ulos ja anna leuan pudota hieman rennommaksi",
+              "Kallista päätä hyvin kevyesti oikealle ja takaisin keskelle",
+              "Kallista päätä hyvin kevyesti vasemmalle ja takaisin keskelle",
+              "Toista rauhassa viisi hengityskierrosta"
+            ],
+            note: "Vältä äkkinäisiä liikkeitä ja tee liike vain, kun auto on turvallisesti paikallaan."
+          }
+        ]
+      },
+
+      insideBus: {
+        label: "Ohjelma: matkustajien alueella",
+        poses: [
+          {
+            title: "Huomaamaton hengitys",
+            sub: "Voit tehdä seisten tai istuen matkustajien keskellä",
+            steps: [
+              "Hengitä sisään nenän kautta neljä laskua",
+              "Hengitä ulos nenän tai suun kautta kuusi laskua",
+              "Pidä olkapäät ja kasvot neutraalin näköisinä",
+              "Jatka kuudesta kymmeneen hengityskierrosta",
+              "Tunnustele miten keho hiljalleen pehmenee"
+            ],
+            note: "Ulospäin tämä näyttää vain rauhalliselta olemiselta."
+          },
+          {
+            title: "Selän mikropyöristys",
+            sub: "Lähes näkymätön liike",
+            steps: [
+              "Hengitä sisään ja tunne selkärangan pidentyvän hieman",
+              "Hengitä ulos ja pyöristä selkää aivan vähän, vain muutama milli",
+              "Hengitä sisään ja palaa neutraaliin asentoon",
+              "Toista tätä viiden hengityskierroksen ajan",
+              "Säädä liikkeen kokoa niin, että se tuntuu hyvältä eikä satu"
+            ],
+            note: "Hyvin pieni liike voi tuoda yllättävän paljon helpotusta."
+          }
+        ]
+      },
+
+      homeRelax: {
+        label: "Ohjelma: kotona",
+        poses: [
+          {
+            title: "Lattiahengitys",
+            sub: "Syvä lepo kotona, esimerkiksi olohuoneen lattialla",
+            steps: [
+              "Mene selin makuulle ja laita tyyny pään tai polvien alle jos haluat",
+              "Aseta toinen käsi vatsalle ja toinen rinnalle",
+              "Hengitä sisään nenän kautta niin että vatsan alla oleva käsi nousee ensin",
+              "Hengitä ulos pidempään kuin sisään ja anna kehon painua lattiaan",
+              "Toista tämä rauhallinen hengitys kymmenen kierrosta"
+            ],
+            note: "Jos alat haukotella, se on merkki siitä että hermosto rauhoittuu."
+          },
+          {
+            title: "Kissa–lehmä tuolilla",
+            sub: "Pehmeä selän liike tuolissa istuen",
+            steps: [
+              "Istu tukevasti tuolilla, jalat lattiassa",
+              "Hengitä sisään ja notkista selkää hieman, katse nousee ylös",
+              "Hengitä ulos ja pyöristä selkää, katse laskee kohti syliä",
+              "Toista 8–12 kertaa hengityksen tahdissa",
+              "Lopuksi palaa neutraaliin asentoon ja hengitä pari kertaa tavallisesti"
+            ],
+            note: "Liikkeen ei tarvitse olla suuri, tärkeintä on selän pehmeä aaltoilu."
+          }
+        ]
+      }
+    };
+
+    // ------------------ TILA ------------------
+    let currentProgramKey = null;
+    let currentPoseIndex = 0;
+    let currentLineIndex = 0;
+
+    const menuEl = document.getElementById("menu");
+    const poseAreaEl = document.getElementById("pose-area");
+    const programLabelEl = document.getElementById("program-label");
+    const poseTitleEl = document.getElementById("pose-title");
+    const poseSubEl = document.getElementById("pose-sub");
+    const poseStepsEl = document.getElementById("pose-steps");
+    const poseNoteEl = document.getElementById("pose-note");
+
+    // ------------------ FUNKTIOT ------------------
+    function startProgram(key) {
+      speechSynthesis.cancel();
+
+      currentProgramKey = key;
+      currentPoseIndex = 0;
+      currentLineIndex = 0;
+
+      renderPose();
+
+      menuEl.style.display = "none";
+      poseAreaEl.classList.remove("hidden");
     }
-  ],
 
-  driverSeat: [
-    {
-      title: "Penkkijooga – alaselälle",
-      sub: "Istuen, moottorin käydessä",
-      steps: [
-        "Istu selkä suorana penkissä",
-        "Hengitä sisään ja kallista lantiota hieman eteenpäin",
-        "Hengitä ulos ja kallista lantiota hieman taaksepäin",
-        "Toista kahdeksan rauhallista hengityskierrosta",
-        "Pidä liike kivuttomana ja pehmeänä"
-      ],
-      note: "Tämä vapauttaa alaselkää ilman että kukaan huomaa."
-    },
-    {
-      title: "Niskan vapautus",
-      sub: "Turvallinen liike liikennevaloissa",
-      steps: [
-        "Hengitä sisään ja pidennä niskaa kevyesti",
-        "Hengitä ulos ja päästä leuka rennoksi",
-        "Kallista päätä hyvin kevyesti kummallekin puolelle",
-        "Pidä hengitys tasaisena",
-        "Toista 5 kertaa"
-      ],
-      note: "Älä tee teräviä liikkeitä ajon aikana."
+    function backToMenu() {
+      speechSynthesis.cancel();
+      poseAreaEl.classList.add("hidden");
+      menuEl.style.display = "block";
     }
-  ],
 
-  insideBus: [
-    {
-      title: "Huomaamaton hengitys",
-      sub: "Sopii matkustajien alueella",
-      steps: [
-        "Istu tai seiso normaalisti",
-        "Hengitä sisään neljä sekuntia",
-        "Hengitä ulos kuusi sekuntia",
-        "Pidä kasvot neutraaleina",
-        "Toista 6–10 kierrosta"
-      ],
-      note: "Näyttää ulospäin vain rauhalliselta hengitykseltä."
-    },
-    {
-      title: "Selän mikropyöristys",
-      sub: "Lähes näkymätön liike",
-      steps: [
-        "Hengitä sisään ja pidennä rankaa",
-        "Hengitä ulos ja pyöristä selkää muutama milli",
-        "Hengitä sisään ja palaa neutraaliin",
-        "Toista viisi hengityskierrosta",
-        "Pidä liike niin pienenä että kukaan ei huomaa"
-      ],
-      note: "Tämä helpottaa selkää ilman että erotut joukosta."
+    function getCurrentPose() {
+      const program = programs[currentProgramKey];
+      return program.poses[currentPoseIndex];
     }
-  ],
 
-  homeRelax: [
-    {
-      title: "Lattiahengitys",
-      sub: "Syvä lepo kotona",
-      steps: [
-        "Mene selin makuulle ja tuo käsi vatsalle",
-        "Hengitä sisään rauhallisesti nenän kautta",
-        "Tunne vatsan kohoavan",
-        "Hengitä ulos pidempään kuin sisään",
-        "Toista kymmenen hengityskierrosta"
-      ],
-      note: "Voit tehdä tämän sängyssä tai matolla."
-    },
-    {
-      title: "Kissa–lehmä tuolilla",
-      sub: "Pehmeä selän liike kotona",
-      steps: [
-        "Istu tuolilla kädet reisillä",
-        "Hengitä sisään ja notkista selkää",
-        "Hengitä ulos ja pyöristä selkää",
-        "Toista 8–12 kertaa",
-        "Liike on jatkuvasti pehmeä ja kivuton"
-      ],
-      note: "Klassinen jooga-asento mutta täysin tuolissa tehtynä."
+    function renderPose() {
+      const program = programs[currentProgramKey];
+      const pose = getCurrentPose();
+
+      programLabelEl.textContent = program.label;
+      poseTitleEl.textContent = pose.title;
+      poseSubEl.textContent = pose.sub;
+
+      poseStepsEl.innerHTML = "";
+      pose.steps.forEach(step => {
+        const li = document.createElement("li");
+        li.textContent = step;
+        poseStepsEl.appendChild(li);
+      });
+
+      poseNoteEl.textContent = pose.note;
+
+      currentLineIndex = 0;
     }
-  ]
-};
 
-// ------------- LOGIIKKA -------------
-let currentProgram = [];
-let currentPose = 0;
-let currentLine = 0;
+    function speakNextLine() {
+      if (!("speechSynthesis" in window)) {
+        alert("Tämä selain ei tue puhetta. Kokeile Chromea tai muuta selainta.");
+        return;
+      }
 
-function startProgram(name) {
-  currentProgram = programs[name];
-  currentPose = 0;
-  currentLine = 0;
+      const pose = getCurrentPose();
+      const lines = [
+        pose.title,
+        pose.sub,
+        ...pose.steps,
+        pose.note
+      ];
 
-  document.getElementById("menu").classList.add("hidden");
-  document.getElementById("pose-area").classList.remove("hidden");
+      if (currentLineIndex >= lines.length) {
+        const doneUtterance = new SpeechSynthesisUtterance(
+          "Tämän asennon ohjeet on nyt luettu."
+        );
+        doneUtterance.lang = "fi-FI";
+        speechSynthesis.cancel();
+        speechSynthesis.speak(doneUtterance);
+        return;
+      }
 
-  renderPose();
-}
+      const text = lines[currentLineIndex];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "fi-FI";
+      utterance.rate = 0.95;
 
-function backToMenu() {
-  speechSynthesis.cancel();
-  document.getElementById("pose-area").classList.add("hidden");
-  document.getElementById("menu").classList.remove("hidden");
-}
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utterance);
 
-function renderPose() {
-  const pose = currentProgram[currentPose];
+      currentLineIndex++;
+    }
 
-  document.getElementById("pose-title").textContent = pose.title;
-  document.getElementById("pose-sub").textContent = pose.sub;
+    function nextPose() {
+      speechSynthesis.cancel();
 
-  const stepsEl = document.getElementById("pose-steps");
-  stepsEl.innerHTML = "";
-  pose.steps.forEach(s => {
-    const li = document.createElement("li");
-    li.textContent = s;
-    stepsEl.appendChild(li);
-  });
+      const program = programs[currentProgramKey];
+      currentPoseIndex++;
 
-  document.getElementById("pose-note").textContent = pose.note;
+      if (currentPoseIndex >= program.poses.length) {
+        currentPoseIndex = 0;
+      }
 
-  currentLine = 0;
-}
+      renderPose();
+    }
 
-function speakLine() {
-  const pose = currentProgram[currentPose];
-  let lines = [pose.title, pose.sub, ...pose.steps, pose.note];
-
-  if (currentLine >= lines.length) {
-    let u = new SpeechSynthesisUtterance("Ohjelman tämän asennon ohjeet on nyt luettu.");
-    u.lang = "fi-FI";
-    speechSynthesis.speak(u);
-    return;
-  }
-
-  speechSynthesis.cancel();
-
-  let u = new SpeechSynthesisUtterance(lines[currentLine]);
-  u.lang = "fi-FI";
-  u.rate = 0.95;
-  speechSynthesis.speak(u);
-
-  currentLine++;
-}
-
-function nextPose() {
-  speechSynthesis.cancel();
-  currentPose++;
-
-  if (currentPose >= currentProgram.length) {
-    currentPose = 0;
-  }
-
-  renderPose();
-}
-
-// ----- Nappi-eventit -----
-document.getElementById("btn-next-line").onclick = speakLine;
-document.getElementById("btn-next").onclick = nextPose;
-
-</script>
+    // ------------------ NAPPI-EVENTIT ------------------
+    document.getElementById("btn-next-line").addEventListener("click", speakNextLine);
+    document.getElementById("btn-next-pose").addEventListener("click", nextPose);
+  </script>
 </body>
 </html>
