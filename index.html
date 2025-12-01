@@ -2,7 +2,7 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
-  <title>Mindful Jooga – Ääniopastus</title>
+  <title>Mindful Jooga – Ohjelmavalikko & Ääniopastus</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
@@ -10,7 +10,6 @@
       line-height: 1.6;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background: #f4f5fb;
       color: #222;
@@ -18,564 +17,328 @@
       justify-content: center;
       padding: 20px;
     }
-
     .page {
       max-width: 900px;
       width: 100%;
       background: #ffffff;
       border-radius: 20px;
-      padding: 20px 16px 28px;
+      padding: 22px 16px 30px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     }
+    header { text-align: center; margin-bottom: 18px; }
+    header h1 { font-size: 1.7rem; margin-bottom: 6px; }
+    .tagline { font-size: 0.85rem; color: #777; margin-top: 4px; }
 
-    header {
+    .menu-title {
       text-align: center;
-      margin-bottom: 18px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 14px;
     }
-    header h1 {
-      font-size: 1.7rem;
-      margin-bottom: 6px;
+
+    .menu-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
     }
-    header p {
-      font-size: 0.96rem;
-      color: #555;
+
+    .menu-buttons button {
+      border: none;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 1rem;
+      background: #4c7dff;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      cursor: pointer;
     }
-    .tagline {
-      font-size: 0.85rem;
-      color: #777;
-      margin-top: 4px;
+    .menu-buttons button:active {
+      transform: translateY(1px);
     }
 
     .pose-card {
-      margin-top: 16px;
-      padding: 14px 14px 16px;
+      padding: 16px;
       border-radius: 16px;
-      border: 1px solid #e1e1e1;
-      background: #fafafa;
+      background: #f7f7ff;
+      margin-top: 10px;
+      border: 1px solid #ddd;
     }
+
     .pose-title {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
-    .pose-sub {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 8px;
-    }
-    .pose-steps {
-      font-size: 0.9rem;
-      margin-left: 1.1rem;
-      margin-bottom: 8px;
-    }
-    .pose-steps li {
-      margin-bottom: 2px;
-    }
-    .pose-note {
-      font-size: 0.82rem;
-      color: #666;
-    }
+    .pose-sub { font-size: 0.9rem; color: #666; margin-bottom: 8px; }
+
+    ul { margin-left: 1.1rem; font-size: 0.9rem; }
+    .pose-note { font-size: 0.82rem; color: #666; margin-top: 8px; }
 
     .controls {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
       margin-top: 14px;
     }
-    button {
+
+    button.action {
       border: none;
       border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 0.9rem;
+      padding: 9px 16px;
+      font-size: 0.92rem;
       cursor: pointer;
       background: #4c7dff;
       color: white;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
     }
-    button.secondary {
-      background: #e5e8ff;
+    button.alt {
+      background: #e3e6ff;
       color: #2c3f7a;
     }
-    button:active {
-      transform: translateY(1px);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
-    }
 
-    .small-info {
-      font-size: 0.78rem;
-      color: #777;
-      margin-top: 10px;
-    }
+    .hidden { display: none; }
 
     .footer-note {
-      margin-top: 22px;
-      font-size: 0.78rem;
+      margin-top: 20px;
+      font-size: 0.75rem;
       color: #777;
       text-align: center;
-    }
-    .inline-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      border: 1px solid #ddd;
-      margin-left: 4px;
-    }
-
-    @media (max-width: 600px) {
-      .page { padding: 16px 12px 22px; border-radius: 14px; }
-      header h1 { font-size: 1.4rem; }
     }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
-      <h1>Mindful Jooga – Ääniopastus isokokoiselle miehelle</h1>
-      <p>Yksi asento kerrallaan. Paina nappia, niin sivu lukee ohjeet sinulle.</p>
-      <div class="tagline">Jooga on sinua varten juuri sellaisena kuin olet.</div>
+      <h1>Mindful Jooga – Ääniopastus</h1>
+      <div class="tagline">Lyhyitä harjoituksia bussille, töihin ja kotiin.</div>
     </header>
 
-    <section class="pose-card">
-      <div id="pose-title" class="pose-title"></div>
-      <div id="pose-sub" class="pose-sub"></div>
+    <!-- OHJELMAVALIKKO -->
+    <div id="menu">
+      <div class="menu-title">Valitse ohjelma</div>
+      <div class="menu-buttons">
+        <button onclick="startProgram('startWaiting')">🚌 Bussin lähtöä odottaessa</button>
+        <button onclick="startProgram('driverSeat')">🪑 Kuljettajan penkissä</button>
+        <button onclick="startProgram('insideBus')">🚏 Matkustajien alueella</button>
+        <button onclick="startProgram('homeRelax')">🏠 Kotona tehtävä ohjelma</button>
+      </div>
+    </div>
 
-      <ul id="pose-steps" class="pose-steps"></ul>
+    <!-- SISÄLTÖALUE – TÄYTETÄÄN JAVASCRIPTILLÄ -->
+    <div id="pose-area" class="hidden">
+      <button onclick="backToMenu()" class="action alt">⬅️ Takaisin ohjelmavalikkoon</button>
 
-      <p id="pose-note" class="pose-note"></p>
+      <div class="pose-card">
+        <div id="pose-title" class="pose-title"></div>
+        <div id="pose-sub" class="pose-sub"></div>
+        <ul id="pose-steps"></ul>
+        <p id="pose-note" class="pose-note"></p>
 
-      <div class="controls">
-        <button id="btn-speak">🔊 Toista ohje ääneen</button>
-        <button id="btn-next" class="secondary">➡️ Seuraava asento</button>
+        <div class="controls">
+          <button id="btn-next-line" class="action">🔊 Lue seuraava lause</button>
+          <button id="btn-next" class="action alt">➡️ Seuraava asento</button>
+        </div>
       </div>
 
-      <p class="small-info">
-        Vinkki: laita puhelimen näyttö pysymään päällä, jos haluat kuunnella pidempään.  
-        Jos puhe ei kuulu, tarkista selaimen ääni-asetukset ja kokeile Chromea.
+      <p style="font-size:0.75rem; color:#777; margin-top:8px;">
+        Vinkki: jos puhe ei kuulu, tarkista median äänenvoimakkuus.
       </p>
-    </section>
+    </div>
 
     <p class="footer-note">
-      Tämä sivu ei korvaa ammattilaisen ohjausta
-      <span class="inline-badge">ei terapeutti / fysioterapeutti</span><br>
-      Kuuntele kehoasi ja lopeta, jos sattuu.
+      Tämä sivu ei korvaa ammattilaisen ohjausta.
     </p>
   </div>
 
-  <script>
-    // JOOGA-ASENNOT – samat joita käytimme aiemmin
-    const poses = [
-      {
-        title: "Vuoriasento tuolilla",
-        sub: "Tuolilla tai seisten, helppo aloitusasento",
-        steps: [
-          "Istu tukevasti tuolilla tai seiso jalat lantion leveydellä.",
-          "Anna vatsan olla pehmeä, ei tarvitse vetää sisään.",
-          "Rullaa hartiat kevyesti taakse ja alas.",
-          "Hengitä sisään ja tunne rinnan ja vatsan kohoavan.",
-          "Hengitä ulos ja anna hartioiden rentoutua ja katseen pehmetä."
-        ],
-        note: "Voit pitää kädet reisillä, sivuilla tai yhdistää kämmenet kevyesti rinnan eteen."
-      },
-      {
-        title: "Tuoliasento seinää vasten",
-        sub: "Reidet töissä, selälle tukea",
-        steps: [
-          "Nojaa selällä seinää vasten, jalat hieman edessä.",
-          "Laskeudu kevyesti näkymättömälle tuolille.",
-          "Polvet saavat olla korkeammalla kuin 90 astetta, jos polvet kipeytyvät helposti.",
-          "Pidä hengitys tasaisena, 5–8 rauhallista hengitystä.",
-          "Tule ylös heti, jos reidet väsyvät liikaa."
-        ],
-        note: "Voit tehdä asennon 2–3 kierrosta, jos se tuntuu hyvältä."
-      },
-      {
-        title: "Kissa–lehmä pöydän ääressä",
-        sub: "Selälle liikettä ilman lattialle menoa",
-        steps: [
-          "Istu tuolilla pöydän ääressä, kädet pöydällä.",
-          "Hengitä sisään ja kaarra selkää hieman notkolle, katse ylös – tämä on lehmä.",
-          "Hengitä ulos ja pyöristä selkää, vedä napaa kevyesti sisään – tämä on kissa.",
-          "Jatka 8–10 kertaa omaan hengitysrytmiisi.",
-          "Liike on pehmeä, ei tarvitse mennä äärirajoille."
-        ],
-        note: "Voit tehdä tämän myös nelinkontin lattialla, jos polvet sallivat."
-      },
-      {
-        title: "Lapsen lepoasento tyynyjen kanssa",
-        sub: "Syvä lepoasento",
-        steps: [
-          "Aseta useampi tyyny tai peitto lattialle polvien ja vatsan väliin.",
-          "Laskeudu polvillesi ja tuo ylävartalo tyynyjen päälle.",
-          "Anna vatsan levätä pehmeästi tyynyjen päällä.",
-          "Hengitä rauhallisesti ja anna kehon sulaa tyynyjen päälle.",
-          "Voit levätä 1–3 minuuttia tai vähemmän, oman tuntuman mukaan."
-        ],
-        note: "Jos polvet eivät tykkää, tee tämä sängyn tai sohvan reunaa vasten."
-      },
-      {
-        title: "Selinmakuu ja kädet vatsalla",
-        sub: "Loppurentoutus",
-        steps: [
-          "Mene selin makuulle lattialle tai sänkyyn, polvet voivat olla koukussa.",
-          "Aseta toinen käsi rinnan päälle ja toinen vatsalle.",
-          "Hengitä sisään ja tunne, kuinka käsi vatsalla kohoaa.",
-          "Hengitä ulos ja huomaa keho painumassa alustaan.",
-          "Laske hengityksiä yhdestä kymmeneen ja aloita sitten alusta, jos haluat jatkaa."
-        ],
-        note: "Jos alaselkä tuntuu, laita tyyny polvien alle. Myös pään alle voi laittaa tyynyn."
-      }
-    ];
-
-    let currentIndex = 0;
-
-    const titleEl = document.getElementById("pose-title");
-    const subEl = document.getElementById("pose-sub");
-    const stepsEl = document.getElementById("pose-steps");
-    const noteEl = document.getElementById("pose-note");
-    const btnSpeak = document.getElementById("btn-speak");
-    const btnNext = document.getElementById("btn-next");
-
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-  <meta charset="UTF-8">
-  <title>Mindful Jooga – Ääniopastus</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
+<script>
+// ------------- OHJELMAT -------------
+const programs = {
+  startWaiting: [
+    {
+      title: "Rauhoittava hengitys",
+      sub: "6 hengityskierrosta seisten tai tuolissa",
+      steps: [
+        "Asetu tukevasti seisomaan tai istu penkille",
+        "Hengitä nenän kautta sisään neljä sekuntia",
+        "Pidä hetki paussia",
+        "Hengitä suun kautta ulos kuusi sekuntia",
+        "Toista kuusi kertaa rauhallisesti"
+      ],
+      note: "Katse voi olla alaviistoon. Tämä rauhoittaa hermostoa nopeasti."
+    },
+    {
+      title: "Hartioiden avaus",
+      sub: "Valmistaa kuljettajan päivään",
+      steps: [
+        "Rullaa hartiat hitaasti taakse",
+        "Hengitä sisään ja nosta rintaa hieman",
+        "Hengitä ulos ja anna hartioiden pudota",
+        "Toista viisi kertaa",
+        "Pidä hengitys pehmeänä koko ajan"
+      ],
+      note: "Liike on hyvin pieni ja huomaamaton."
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  ],
 
-    body {
-      background: #f4f5fb;
-      color: #222;
-      display: flex;
-      justify-content: center;
-      padding: 20px;
+  driverSeat: [
+    {
+      title: "Penkkijooga – alaselälle",
+      sub: "Istuen, moottorin käydessä",
+      steps: [
+        "Istu selkä suorana penkissä",
+        "Hengitä sisään ja kallista lantiota hieman eteenpäin",
+        "Hengitä ulos ja kallista lantiota hieman taaksepäin",
+        "Toista kahdeksan rauhallista hengityskierrosta",
+        "Pidä liike kivuttomana ja pehmeänä"
+      ],
+      note: "Tämä vapauttaa alaselkää ilman että kukaan huomaa."
+    },
+    {
+      title: "Niskan vapautus",
+      sub: "Turvallinen liike liikennevaloissa",
+      steps: [
+        "Hengitä sisään ja pidennä niskaa kevyesti",
+        "Hengitä ulos ja päästä leuka rennoksi",
+        "Kallista päätä hyvin kevyesti kummallekin puolelle",
+        "Pidä hengitys tasaisena",
+        "Toista 5 kertaa"
+      ],
+      note: "Älä tee teräviä liikkeitä ajon aikana."
     }
+  ],
 
-    .page {
-      max-width: 900px;
-      width: 100%;
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 20px 16px 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  insideBus: [
+    {
+      title: "Huomaamaton hengitys",
+      sub: "Sopii matkustajien alueella",
+      steps: [
+        "Istu tai seiso normaalisti",
+        "Hengitä sisään neljä sekuntia",
+        "Hengitä ulos kuusi sekuntia",
+        "Pidä kasvot neutraaleina",
+        "Toista 6–10 kierrosta"
+      ],
+      note: "Näyttää ulospäin vain rauhalliselta hengitykseltä."
+    },
+    {
+      title: "Selän mikropyöristys",
+      sub: "Lähes näkymätön liike",
+      steps: [
+        "Hengitä sisään ja pidennä rankaa",
+        "Hengitä ulos ja pyöristä selkää muutama milli",
+        "Hengitä sisään ja palaa neutraaliin",
+        "Toista viisi hengityskierrosta",
+        "Pidä liike niin pienenä että kukaan ei huomaa"
+      ],
+      note: "Tämä helpottaa selkää ilman että erotut joukosta."
     }
+  ],
 
-    header {
-      text-align: center;
-      margin-bottom: 18px;
+  homeRelax: [
+    {
+      title: "Lattiahengitys",
+      sub: "Syvä lepo kotona",
+      steps: [
+        "Mene selin makuulle ja tuo käsi vatsalle",
+        "Hengitä sisään rauhallisesti nenän kautta",
+        "Tunne vatsan kohoavan",
+        "Hengitä ulos pidempään kuin sisään",
+        "Toista kymmenen hengityskierrosta"
+      ],
+      note: "Voit tehdä tämän sängyssä tai matolla."
+    },
+    {
+      title: "Kissa–lehmä tuolilla",
+      sub: "Pehmeä selän liike kotona",
+      steps: [
+        "Istu tuolilla kädet reisillä",
+        "Hengitä sisään ja notkista selkää",
+        "Hengitä ulos ja pyöristä selkää",
+        "Toista 8–12 kertaa",
+        "Liike on jatkuvasti pehmeä ja kivuton"
+      ],
+      note: "Klassinen jooga-asento mutta täysin tuolissa tehtynä."
     }
-    header h1 {
-      font-size: 1.7rem;
-      margin-bottom: 6px;
-    }
-    header p {
-      font-size: 0.96rem;
-      color: #555;
-    }
-    .tagline {
-      font-size: 0.85rem;
-      color: #777;
-      margin-top: 4px;
-    }
+  ]
+};
 
-    .pose-card {
-      margin-top: 16px;
-      padding: 14px 14px 16px;
-      border-radius: 16px;
-      border: 1px solid #e1e1e1;
-      background: #fafafa;
-    }
-    .pose-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .pose-sub {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 8px;
-    }
-    .pose-steps {
-      font-size: 0.9rem;
-      margin-left: 1.1rem;
-      margin-bottom: 8px;
-    }
-    .pose-steps li {
-      margin-bottom: 2px;
-    }
-    .pose-note {
-      font-size: 0.82rem;
-      color: #666;
-    }
+// ------------- LOGIIKKA -------------
+let currentProgram = [];
+let currentPose = 0;
+let currentLine = 0;
 
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-    button {
-      border: none;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      background: #4c7dff;
-      color: white;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-    }
-    button.secondary {
-      background: #e5e8ff;
-      color: #2c3f7a;
-    }
-    button:active {
-      transform: translateY(1px);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
-    }
+function startProgram(name) {
+  currentProgram = programs[name];
+  currentPose = 0;
+  currentLine = 0;
 
-    .small-info {
-      font-size: 0.78rem;
-      color: #777;
-      margin-top: 10px;
-    }
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("pose-area").classList.remove("hidden");
 
-    .footer-note {
-      margin-top: 22px;
-      font-size: 0.78rem;
-      color: #777;
-      text-align: center;
-    }
-    .inline-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      border: 1px solid #ddd;
-      margin-left: 4px;
-    }
+  renderPose();
+}
 
-    @media (max-width: 600px) {
-      .page { padding: 16px 12px 22px; border-radius: 14px; }
-      header h1 { font-size: 1.4rem; }
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <header>
-      <h1>Mindful Jooga – Ääniopastus isokokoiselle miehelle</h1>
-      <p>Yksi asento kerrallaan. Paina nappia, niin sivu lukee ohjeet sinulle.</p>
-      <div class="tagline">Jooga on sinua varten juuri sellaisena kuin olet.</div>
-    </header>
+function backToMenu() {
+  speechSynthesis.cancel();
+  document.getElementById("pose-area").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+}
 
-    <section class="pose-card">
-      <div id="pose-title" class="pose-title"></div>
-      <div id="pose-sub" class="pose-sub"></div>
+function renderPose() {
+  const pose = currentProgram[currentPose];
 
-      <ul id="pose-steps" class="pose-steps"></ul>
+  document.getElementById("pose-title").textContent = pose.title;
+  document.getElementById("pose-sub").textContent = pose.sub;
 
-      <p id="pose-note" class="pose-note"></p>
+  const stepsEl = document.getElementById("pose-steps");
+  stepsEl.innerHTML = "";
+  pose.steps.forEach(s => {
+    const li = document.createElement("li");
+    li.textContent = s;
+    stepsEl.appendChild(li);
+  });
 
-      <div class="controls">
-        <button id="btn-speak">🔊 Toista ohje ääneen</button>
-        <button id="btn-next" class="secondary">➡️ Seuraava asento</button>
-      </div>
+  document.getElementById("pose-note").textContent = pose.note;
 
-      <p class="small-info">
-        Vinkki: laita puhelimen näyttö pysymään päällä, jos haluat kuunnella pidempään.  
-        Jos puhe ei kuulu, tarkista selaimen ääni-asetukset ja kokeile Chromea.
-      </p>
-    </section>
+  currentLine = 0;
+}
 
-    <p class="footer-note">
-      Tämä sivu ei korvaa ammattilaisen ohjausta
-      <span class="inline-badge">ei terapeutti / fysioterapeutti</span><br>
-      Kuuntele kehoasi ja lopeta, jos sattuu.
-    </p>
-  </div>
+function speakLine() {
+  const pose = currentProgram[currentPose];
+  let lines = [pose.title, pose.sub, ...pose.steps, pose.note];
 
-  <script>
-    // JOOGA-ASENNOT – samat joita käytimme aiemmin
-    const poses = [
-      {
-        title: "Vuoriasento tuolilla",
-        sub: "Tuolilla tai seisten, helppo aloitusasento",
-        steps: [
-          "Istu tukevasti tuolilla tai seiso jalat lantion leveydellä.",
-          "Anna vatsan olla pehmeä, ei tarvitse vetää sisään.",
-          "Rullaa hartiat kevyesti taakse ja alas.",
-          "Hengitä sisään ja tunne rinnan ja vatsan kohoavan.",
-          "Hengitä ulos ja anna hartioiden rentoutua ja katseen pehmetä."
-        ],
-        note: "Voit pitää kädet reisillä, sivuilla tai yhdistää kämmenet kevyesti rinnan eteen."
-      },
-      {
-        title: "Tuoliasento seinää vasten",
-        sub: "Reidet töissä, selälle tukea",
-        steps: [
-          "Nojaa selällä seinää vasten, jalat hieman edessä.",
-          "Laskeudu kevyesti näkymättömälle tuolille.",
-          "Polvet saavat olla korkeammalla kuin 90 astetta, jos polvet kipeytyvät helposti.",
-          "Pidä hengitys tasaisena, 5–8 rauhallista hengitystä.",
-          "Tule ylös heti, jos reidet väsyvät liikaa."
-        ],
-        note: "Voit tehdä asennon 2–3 kierrosta, jos se tuntuu hyvältä."
-      },
-      {
-        title: "Kissa–lehmä pöydän ääressä",
-        sub: "Selälle liikettä ilman lattialle menoa",
-        steps: [
-          "Istu tuolilla pöydän ääressä, kädet pöydällä.",
-          "Hengitä sisään ja kaarra selkää hieman notkolle, katse ylös – tämä on lehmä.",
-          "Hengitä ulos ja pyöristä selkää, vedä napaa kevyesti sisään – tämä on kissa.",
-          "Jatka 8–10 kertaa omaan hengitysrytmiisi.",
-          "Liike on pehmeä, ei tarvitse mennä äärirajoille."
-        ],
-        note: "Voit tehdä tämän myös nelinkontin lattialla, jos polvet sallivat."
-      },
-      {
-        title: "Lapsen lepoasento tyynyjen kanssa",
-        sub: "Syvä lepoasento",
-        steps: [
-          "Aseta useampi tyyny tai peitto lattialle polvien ja vatsan väliin.",
-          "Laskeudu polvillesi ja tuo ylävartalo tyynyjen päälle.",
-          "Anna vatsan levätä pehmeästi tyynyjen päällä.",
-          "Hengitä rauhallisesti ja anna kehon sulaa tyynyjen päälle.",
-          "Voit levätä 1–3 minuuttia tai vähemmän, oman tuntuman mukaan."
-        ],
-        note: "Jos polvet eivät tykkää, tee tämä sängyn tai sohvan reunaa vasten."
-      },
-      {
-        title: "Selinmakuu ja kädet vatsalla",
-        sub: "Loppurentoutus",
-        steps: [
-          "Mene selin makuulle lattialle tai sänkyyn, polvet voivat olla koukussa.",
-          "Aseta toinen käsi rinnan päälle ja toinen vatsalle.",
-          "Hengitä sisään ja tunne, kuinka käsi vatsalla kohoaa.",
-          "Hengitä ulos ja huomaa keho painumassa alustaan.",
-          "Laske hengityksiä yhdestä kymmeneen ja aloita sitten alusta, jos haluat jatkaa."
-        ],
-        note: "Jos alaselkä tuntuu, laita tyyny polvien alle. Myös pään alle voi laittaa tyynyn."
-      }
-    ];
+  if (currentLine >= lines.length) {
+    let u = new SpeechSynthesisUtterance("Ohjelman tämän asennon ohjeet on nyt luettu.");
+    u.lang = "fi-FI";
+    speechSynthesis.speak(u);
+    return;
+  }
 
-    let currentIndex = 0;
+  speechSynthesis.cancel();
 
-    const titleEl = document.getElementById("pose-title");
-    const subEl = document.getElementById("pose-sub");
-    const stepsEl = document.getElementById("pose-steps");
-    const noteEl = document.getElementById("pose-note");
-    const btnSpeak = document.getElementById("btn-speak");
-    const btnNext = document.getElementById("btn-next");
+  let u = new SpeechSynthesisUtterance(lines[currentLine]);
+  u.lang = "fi-FI";
+  u.rate = 0.95;
+  speechSynthesis.speak(u);
 
-    function renderPose(index) {
-      const pose = poses[index];
-      titleEl.textContent = pose.title;
-      subEl.textContent = pose.sub;
-      stepsEl.innerHTML = "";
-      pose.steps.forEach(step => {
-        const li = document.createElement("li");
-        li.textContent = step;
-        stepsEl.appendChild(li);
-      });
-      noteEl.textContent = pose.note;
-    }
+  currentLine++;
+}
 
-    function speakPose(index) {
-      const pose = poses[index];
-      if (!("speechSynthesis" in window)) {
-        alert("Tässä selaimessa ei näytä olevan tukea puheelle (speechSynthesis). Kokeile toista selainta, esim. Chrome.");
-        return;
-      }
+function nextPose() {
+  speechSynthesis.cancel();
+  currentPose++;
 
-      // pysäytä edellinen puhe
-      window.speechSynthesis.cancel();
+  if (currentPose >= currentProgram.length) {
+    currentPose = 0;
+  }
 
-      const text =
-        pose.title + ". " +
-        pose.sub + ". " +
-        pose.steps.join(". ") + ". " +
-        pose.note;
+  renderPose();
+}
 
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "fi-FI";
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
+// ----- Nappi-eventit -----
+document.getElementById("btn-next-line").onclick = speakLine;
+document.getElementById("btn-next").onclick = nextPose;
 
-      window.speechSynthesis.speak(utterance);
-    }
-
-    btnSpeak.addEventListener("click", () => {
-      speakPose(currentIndex);
-    });
-
-    btnNext.addEventListener("click", () => {
-      window.speechSynthesis.cancel();
-      currentIndex = (currentIndex + 1) % poses.length;
-      renderPose(currentIndex);
-      speakPose(currentIndex);
-    });
-
-    // Näytä ensimmäinen asento heti
-    renderPose(currentIndex);
-  </script>
+</script>
 </body>
-</html>    function renderPose(index) {
-      const pose = poses[index];
-      titleEl.textContent = pose.title;
-      subEl.textContent = pose.sub;
-      stepsEl.innerHTML = "";
-      pose.steps.forEach(step => {
-        const li = document.createElement("li");
-        li.textContent = step;
-        stepsEl.appendChild(li);
-      });
-      noteEl.textContent = pose.note;
-    }
-
-    function speakPose(index) {
-      const pose = poses[index];
-      if (!("speechSynthesis" in window)) {
-        alert("Tässä selaimessa ei näytä olevan tukea puheelle (speechSynthesis). Kokeile toista selainta, esim. Chrome.");
-        return;
-      }
-
-      // pysäytä edellinen puhe
-      window.speechSynthesis.cancel();
-
-      const text =
-        pose.title + ". " +
-        pose.sub + ". " +
-        pose.steps.join(". ") + ". " +
-        pose.note;
-
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "fi-FI";
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    btnSpeak.addEventListener("click", () => {
-      speakPose(currentIndex);
-    });
-
-    btnNext.addEventListener("click", () => {
-      window.speechSynthesis.cancel();
-      currentIndex = (currentIndex + 1) % poses.length;
-      renderPose(currentIndex);
-      speakPose(currentIndex);
-    });
-
-    // Näytä ensimmäinen asento heti
-    renderPose(currentIndex);
-  </script>
-</body>
-</html> 
+</html>
